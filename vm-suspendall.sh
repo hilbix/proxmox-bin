@@ -4,12 +4,13 @@
 # Works with VMs which are keeping the time based on chrony.
 # (I am not yet sure that systemd-timesyncd works properly.)
 #
-# You can add a line into the VM specific setting into the comment of the VM.
-# The line must start with:
+# NOT YET IMPLEMENTED:
+#	You can add a line into the VM specific setting into the comment of the VM.
+#	The line must start with:
 #
-# ONPOWERDOWN:
+#	ONPOWERDOWN:
 #
-# And behind that there is a command name with arguments.
+#	And behind that there is a command name with arguments.
 #
 # BUGs:
 # - This must check if an ISO from the CDROM of VMs are still present.
