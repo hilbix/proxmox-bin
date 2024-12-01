@@ -1,6 +1,8 @@
 #!/bin/bash
 #
 # vm-rename oldid newid
+#
+# Outputs the commands to rename the ID of a VM
 
 POOL=/zfs/VM/images
 
@@ -28,6 +30,7 @@ do
 	esac
 done
 
+printf '\n# WARNING!  This script is not deeply tested!  Commands to rename the VM follow:\n\n' >&2
 for a in "${!REN[@]}"
 do
 	cmd mv -f "$a" "${a%/*}/${REN["$a"]}"
@@ -36,3 +39,4 @@ cmd mv -f "$POOL/$1" "$POOL/$2"
 cmd mv -f "/etc/pve/qemu-server/$1.conf" "/etc/pve/qemu-server/$2.conf" &&
 cmd sed -i "s|VM:$1/vm-$1-disk-|VM:$2/vm-$2-disk-|" "/etc/pve/qemu-server/$2.conf"
 echo :
+
