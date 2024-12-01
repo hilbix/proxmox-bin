@@ -1,15 +1,25 @@
 #!/bin/bash
 #
-# I use this to reboot ProxMox without need to reboot the VMs.
+# I use this to reboot ProxMox without need to reboot all VMs.
 # Works with VMs which are keeping the time based on chrony.
 # (I am not yet sure that systemd-timesyncd works properly.)
 #
-# Missing: Handle VMs differently, which are known to never wake up again.
-# - implement a way to run some VM dependent script with properly shuts down the VMs
+# You can add a line into the VM specific setting into the comment of the VM.
+# The line must start with:
 #
-# Missing: Remove missing ISOs from CDROM of VMs before suspend
-# - A VM with missing ISO cannot be resumed and the ISO cannot be removed afterwards for the VM being locked
-# - Hint:  touch $ISO_STORE/template/$PATH_TO_MISSING_ISO
+# ONPOWERDOWN:
+#
+# And behind that there is a command name with arguments.
+#
+# BUGs:
+# - This must check if an ISO from the CDROM of VMs are still present.
+#   - If not, then the ISO must be removed first before suspending
+#   - This is needed as the ISO cannot be removed while the VM is being suspended
+#   - but it cannot be powered on either, as the ISO is missing
+# - Workaraound:
+#   - touch $ISO_STORE/template/$PATH_TO_MISSING_ISO
+#   - ISO_STORE is: Datacenter :: Storage :: ISO
+#   - PATH_TO_MISSING_ISO is from the VM :: Hartdware : CD/DVD Drive :: ISO image
 
 echo "WARNING! This script is terribly incomplete, see comments in script!"
 
