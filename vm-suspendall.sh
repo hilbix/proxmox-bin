@@ -8,11 +8,12 @@
 #	You can add a line into the VM specific setting into the comment of the VM.
 #	The line must start with:
 #
-#	ONPOWERDOWN:
+#	ONPVESUSPEND:
 #
 #	And behind that there is a command name with arguments.
 #
 # BUGs:
+# - There should be a check that the suspended VMs are restarted properly again
 # - This must check if an ISO from the CDROM of VMs are still present.
 #   - If not, then the ISO must be removed first before suspending
 #   - This is needed as the ISO cannot be removed while the VM is being suspended
